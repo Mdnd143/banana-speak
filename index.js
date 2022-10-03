@@ -10,19 +10,16 @@ function getTranslationURL(text){
     return serverURL + "?text=" + text
 }
 
-function errorHandler(error){
-    console.log("error occured", error)
-}
-
 function clickHandler(){
     var inputText = txtInput.value;
     fetch(getTranslationURL(inputText))
     .then(Response => Response.json())
     .then(json => {
+        console.log(json)
         var translatedText = json.contents.translated;
         outputDiv.innerText = translatedText;
     })
-    .catch(errorHandler)
+    .catch(e=>console.log(e,e.message))
 };
 
 btnTranslate.addEventListener("click", clickHandler)
